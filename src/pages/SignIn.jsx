@@ -71,7 +71,7 @@ const SignIn = () => {
           >
             {loading ? "Signing In..." : "Sign In"}
           </button>
-          <p className="text-center py-2">Don't have an account? <span className="text-teal-600"><Link to="/signup">Sign up</Link></span></p>
+          <p className="text-center py-2">Dont have an account? <span className="text-teal-600"><Link to="/signup">Sign up</Link></span></p>
         </form>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -35,6 +36,17 @@ const MovieCard = ({ movie, onWatchlistToggle, isWatchlisted }) => {
       </button>
     </div>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  }).isRequired,
+  onWatchlistToggle: PropTypes.func.isRequired,
+  isWatchlisted: PropTypes.bool.isRequired,
 };
 
 export default MovieCard;

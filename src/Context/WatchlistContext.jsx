@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 export const WatchlistContext = createContext();
 
@@ -24,4 +25,9 @@ export const WatchlistProvider = ({ children }) => {
       {children}
     </WatchlistContext.Provider>
   );
+};
+
+// Add prop validation for children
+WatchlistProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

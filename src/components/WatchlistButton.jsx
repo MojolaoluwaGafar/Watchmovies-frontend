@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { WatchlistContext } from "../Context/WatchlistContext";
@@ -8,7 +9,7 @@ const WatchlistButton = ({ movie }) => {
   const { toggleWatchlist, watchlist } = useContext(WatchlistContext);
   const navigate = useNavigate();
 
-  if (!movie) return null; // Return nothing if movie is null or undefined
+  if (!movie) return null;
 
   const handleWatchlist = () => {
     if (user) {
@@ -36,6 +37,16 @@ const WatchlistButton = ({ movie }) => {
       {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
     </button>
   );
+};
+
+// ✅ Prop validation for WatchlistButton
+WatchlistButton.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string,
+    imageUrl: PropTypes.string,
+    rating: PropTypes.number,
+  }).isRequired,
 };
 
 export default WatchlistButton;
