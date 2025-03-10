@@ -20,12 +20,12 @@ const MovieCard = ({ movie, onWatchlistToggle, isWatchlisted }) => {
   return (
     <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
       <img
-        src={movie.imageUrl}
-        alt={movie.title}
+        src={movie.Poster}
+        alt={movie.Title}
         className="w-full h-48 object-cover rounded-md"
       />
-      <h3 className="text-lg font-semibold mt-2">{movie.title}</h3>
-      <p className="text-yellow-400 text-sm mt-1">⭐ {movie.rating}/10</p>
+      <h3 className="text-lg font-semibold mt-2">{movie.Title}</h3>
+      <p className="text-yellow-400 text-sm mt-1">⭐ {movie.imdbRating}/10</p>
       <button
         className={`mt-3 w-full ${
           isWatchlisted ? "bg-red-500" : "bg-teal-500"
@@ -40,10 +40,10 @@ const MovieCard = ({ movie, onWatchlistToggle, isWatchlisted }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    imdbID: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Poster: PropTypes.string.isRequired,
+    imdbRating: PropTypes.string.isRequired,
   }).isRequired,
   onWatchlistToggle: PropTypes.func.isRequired,
   isWatchlisted: PropTypes.bool.isRequired,

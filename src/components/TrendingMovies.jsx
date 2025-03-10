@@ -1,10 +1,35 @@
+import { useState, useEffect } from "react";
+
 const TrendingMovies = () => {
-  // Sample movie data (replace with API data later)
-  const movies = [
-    { id: 1, title: "Movie 1", imageUrl: "/path-to-image1.jpg", rating: 8.5 },
-    { id: 2, title: "Movie 2", imageUrl: "/path-to-image2.jpg", rating: 7.8 },
-    { id: 3, title: "Movie 3", imageUrl: "/path-to-image3.jpg", rating: 9.0 },
-  ];
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/trending/movie/day?api_key=2ac430ef`
+        );
+        const data = await response.json();
+
+        if (data.results) {
+          setMovies(data.results); // Set the movie results from the API
+        } else {
+          setError("No trending movies found.");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  if (loading) return <p className="text-center text-white">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <section className="py-10 px-4">
@@ -16,7 +41,7 @@ const TrendingMovies = () => {
             className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src={movie.imageUrl}
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
               className="w-full h-60 object-cover rounded-t-md"
             />
@@ -25,7 +50,7 @@ const TrendingMovies = () => {
                 {movie.title}
               </h3>
               <p className="text-yellow-400 text-sm mt-1">
-                ⭐ {movie.rating}/10
+                ⭐ {movie.vote_average}/10
               </p>
             </div>
           </div>

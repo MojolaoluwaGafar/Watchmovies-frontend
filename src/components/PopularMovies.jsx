@@ -1,9 +1,35 @@
+import { useState, useEffect } from "react";
+
 const PopularMovies = () => {
-  const movies = [
-    { id: 1, title: "Popular Movie 1", image: "/path-to-image1.jpg" },
-    { id: 2, title: "Popular Movie 2", image: "/path-to-image2.jpg" },
-    { id: 3, title: "Popular Movie 3", image: "/path-to-image3.jpg" },
-  ];
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=2ac430ef`
+        );
+        const data = await response.json();
+
+        if (data.results) {
+          setMovies(data.results); // Set the popular movies from the API
+        } else {
+          setError("No popular movies found.");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  if (loading) return <p className="text-center text-white">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <section className="py-10 px-4 bg-gray-900">
@@ -15,7 +41,7 @@ const PopularMovies = () => {
             className="bg-gray-800 rounded-lg overflow-hidden"
           >
             <img
-              src={movie.image}
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
               className="w-full h-60 object-cover"
             />
