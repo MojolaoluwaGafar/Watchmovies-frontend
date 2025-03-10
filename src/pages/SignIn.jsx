@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const SignIn = () => {
-  const { setUser } = useContext(AuthContext); // Set user globally
+  const { login } = useContext(AuthContext); // Set user globally
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,22 +21,7 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Invalid email or password");
-      }
-
-      const data = await response.json();
-
-      // ✅ Store user data and token in localStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setUser(data.user); // Update global auth state
+      await login(formData.email, formData.password);
 
       // ✅ Redirect to homepage
       navigate("/");
