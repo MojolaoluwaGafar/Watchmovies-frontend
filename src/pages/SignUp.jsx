@@ -12,6 +12,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // NEW: Loading state
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,16 +20,39 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    
+    if (!formData.username && !formData.email && !formData.password && !formData.confirmPassword) {
+      setError("Fill the form to create an account");
+      return;
+    }
+
+    if (!formData.username) {
+      setError("Please provide a username");
+      return;
+    }
+
+    if (!formData.email) {
+      setError("Email is required!");
+      return;
+    }
+    if (!formData.password && !formData.confirmPassword) {
+      setError("Please provide a password!");
+      return;
+    }
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match!");
       return;
     }
-
+    
+    setLoading(true);
     const data = await registerUser({
       username: formData.username,
       email: formData.email,
       password: formData.password,
     });
+
+    setLoading(false);
 
     if (data?.user) {
       alert("Signup successful! Redirecting...");
@@ -53,7 +77,7 @@ const SignUp = () => {
             className="w-full p-3 rounded-md bg-gray-700 text-white"
             value={formData.username}
             onChange={handleChange}
-            required
+            
           />
           <input
             type="email"
@@ -62,7 +86,7 @@ const SignUp = () => {
             className="w-full p-3 rounded-md bg-gray-700 text-white"
             value={formData.email}
             onChange={handleChange}
-            required
+            
           />
           <input
             type="password"
@@ -71,7 +95,7 @@ const SignUp = () => {
             className="w-full p-3 rounded-md bg-gray-700 text-white"
             value={formData.password}
             onChange={handleChange}
-            required
+            
           />
           <input
             type="password"
@@ -80,13 +104,14 @@ const SignUp = () => {
             className="w-full p-3 rounded-md bg-gray-700 text-white"
             value={formData.confirmPassword}
             onChange={handleChange}
-            required
+            
           />
           <button
             type="submit"
-            className="w-full bg-teal-400 text-black py-3 rounded-md font-bold"
+            className="w-full bg-teal-400 py-3 rounded-md font-bold disabled:opacity-50"
+            disabled={loading} // Disables button while loading
           >
-            Sign Up
+            {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
         <p className="text-center text-gray-400 mt-4">

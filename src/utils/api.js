@@ -1,27 +1,47 @@
-const API_BASE_URL = "http://localhost:5000/api/auth"; // Update if backend URL changes
+const API_BASE_URL = "http://localhost:5001/api/auth"; // Update if backend URL changes
 
 export const registerUser = async (userData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/register`, {
+    const response = await fetch(`${API_BASE_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-    return response.json();
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Registration failed");
+    }
+
+    return data; // { user, token }
   } catch (error) {
     console.error("Error registering user:", error);
+    return { error: error.message };
   }
 };
 
 export const loginUser = async (userData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${API_BASE_URL}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-    return response.json();
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Login failed");
+    }
+
+    // ✅ Store token and user data in localStorage
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    return data; // { user, token }
   } catch (error) {
     console.error("Error logging in:", error);
+    return { error: error.message };
   }
 };
