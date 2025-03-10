@@ -1,9 +1,9 @@
 const TrendingMovies = () => {
   // Sample movie data (replace with API data later)
   const movies = [
-    { id: 1, title: "Movie 1", image: "/path-to-image1.jpg" },
-    { id: 2, title: "Movie 2", image: "/path-to-image2.jpg" },
-    { id: 3, title: "Movie 3", image: "/path-to-image3.jpg" },
+    { id: 1, title: "Movie 1", imageUrl: "/path-to-image1.jpg", rating: 8.5 },
+    { id: 2, title: "Movie 2", imageUrl: "/path-to-image2.jpg", rating: 7.8 },
+    { id: 3, title: "Movie 3", imageUrl: "/path-to-image3.jpg", rating: 9.0 },
   ];
 
   return (
@@ -13,14 +13,21 @@ const TrendingMovies = () => {
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="bg-gray-800 rounded-lg overflow-hidden"
+            className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src={movie.image}
+              src={movie.imageUrl}
               alt={movie.title}
-              className="w-full h-60 object-cover"
+              className="w-full h-60 object-cover rounded-t-md"
             />
-            <h3 className="text-lg font-semibold p-4">{movie.title}</h3>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-white">
+                {movie.title}
+              </h3>
+              <p className="text-yellow-400 text-sm mt-1">
+                ⭐ {movie.rating}/10
+              </p>
+            </div>
           </div>
         ))}
       </div>

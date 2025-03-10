@@ -1,6 +1,21 @@
-import React from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ movie, onWatchlistToggle, isWatchlisted }) => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleWatchlistClick = () => {
+    if (user) {
+      onWatchlistToggle(movie);
+    } else {
+      navigate("/signin", {
+        state: { message: "Sign in to add to your watchlist!" },
+      });
+    }
+  };
+
   return (
     <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
       <img
@@ -14,7 +29,7 @@ const MovieCard = ({ movie, onWatchlistToggle, isWatchlisted }) => {
         className={`mt-3 w-full ${
           isWatchlisted ? "bg-red-500" : "bg-teal-500"
         } hover:opacity-80 text-white py-2 rounded`}
-        onClick={() => onWatchlistToggle(movie)}
+        onClick={handleWatchlistClick}
       >
         {isWatchlisted ? "Remove from Watchlist" : "Add to Watchlist"}
       </button>

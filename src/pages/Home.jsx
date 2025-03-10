@@ -31,9 +31,9 @@ const Home = () => {
       }
     };
 
-    fetchMovies("trending", setTrendingMovies);
-    fetchMovies("popular", setPopularMovies);
-    fetchMovies("top rated", setTopRatedMovies);
+    fetchMovies("Avengers", setTrendingMovies);
+    fetchMovies("Batman", setPopularMovies);
+    fetchMovies("Spider-Man", setTopRatedMovies);
   }, []);
 
   return (
