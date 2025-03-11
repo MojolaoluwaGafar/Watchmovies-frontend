@@ -9,7 +9,7 @@ const TopRatedMovies = () => {
     const fetchMovies = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/top_rated?api_key=2ac430ef`
+          `https://api.themoviedb.org/3/movie/top_rated?api_key=35e506fd9b296749fec3d8b8118e2652`
         );
         const data = await response.json();
 
