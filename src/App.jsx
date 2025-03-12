@@ -1,79 +1,40 @@
-// import './App.css'
-// import { Routes, Route } from "react-router-dom";
-// import Header from "./components/Header";
-// import HeroSection from "./components/HeroSection";
-// import TrendingMovies from "./components/TrendingMovies";
-// import PopularMovies from "./components/PopularMovies";
-// import TopRatedMovies from "./components/TopRatedMovies";
-// import Footer from "./components/Footer";
-// import SignIn from "./pages/SignIn";
-// import SignUp from "./pages/SignUp";
-// import Watchlist from "./pages/Watchlist";
-// import PrivateRoute from "./components/PrivateRoute";
-
-// function App() {
-//   return (
-//     <div className="bg-gray-900 text-white">
-//       <Header />
-//       <Routes>
-//         <Route
-//           path="/"
-//           element={
-//             <>
-//               <HeroSection />
-//               <TrendingMovies />
-//               <PopularMovies />
-//               <TopRatedMovies />
-//             </>
-//           }
-//         />
-//         <Route path="/signin" element={<SignIn />} />
-//         <Route path="/signup" element={<SignUp />} />
-//         <Route
-//           path="/watchlist"
-//           element={
-//             <PrivateRoute>
-//               <Watchlist />
-//             </PrivateRoute>
-//           }
-//         />
-//       </Routes>
-//       <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import { Routes, Route } from "react-router-dom"; // ✅ Removed `Router`
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Watchlist from "./pages/Watchlist";
 import PrivateRoute from "./components/PrivateRoute";
 import MovieDetails from "./components/Movie/MovieDetails";
+import TrendingMovies from "./components/TrendingMovies";
+import PopularMovies from "./components/PopularMovies";
+import TopRatedMovies from "./components/TopRatedMovies";
+
 
 function App() {
   return (
-    <div className="bg-gray-900 text-white">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route
-          path="/watchlist"
-          element={
-            <PrivateRoute>
-              <Watchlist />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-      <Footer />
+    <div className="bg-gray-900 text-white min-h-screen">
+      <Toaster position="top-right" reverseOrder={false} />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/trending" element={<TrendingMovies />} />
+          <Route path="/popular" element={<PopularMovies />} />
+          <Route path="/top-rated" element={<TopRatedMovies />} />
+          <Route
+            path="/watchlist"
+            element={
+              <PrivateRoute>
+                <Watchlist />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Layout>
     </div>
   );
 }

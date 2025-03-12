@@ -25,12 +25,10 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Mobile Menu Button */}
         <button className="text-teal-400 md:hidden" onClick={toggleMenu}>
           {isMenuOpen ? <HiX size={30} /> : <HiMenuAlt3 size={30} />}
         </button>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 text-white">
           <Link to="/trending" className="hover:text-teal-400">
             Trending
@@ -43,7 +41,6 @@ const Header = () => {
           </Link>
         </nav>
 
-        {/* Auth Buttons (Desktop) */}
         <div className="hidden md:flex items-center gap-4">
           {user ? (
             <>
@@ -80,9 +77,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed top-0 left-0 w-full bg-black shadow-md py-6 px-6 md:hidden">
+        <div className="fixed top-0 left-0 w-full max-h-[70vh] bg-black bg-opacity-95 shadow-md py-6 px-6 md:hidden rounded-b-lg z-[9999]">
           <button
             onClick={toggleMenu}
             className="absolute top-4 right-6 text-teal-400"
@@ -90,7 +86,7 @@ const Header = () => {
             <HiX size={30} />
           </button>
 
-          <nav className="flex flex-col items-center gap-6 text-white mt-4">
+          <nav className="flex flex-col items-center gap-6 text-white mt-10">
             <Link
               to="/trending"
               onClick={toggleMenu}
