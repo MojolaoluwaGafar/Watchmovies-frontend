@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import { AuthContext } from "../Context/AuthContext"; // Import Auth Context
+import { AuthContext } from "../Context/AuthContext";
 
 const Footer = () => {
-  const { user } = useContext(AuthContext); // Access user state
+  const { user } = useContext(AuthContext);
 
   return (
     <footer className="bg-gray-900 text-gray-300 py-12 mt-10">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-        {/* Brand Section */}
         <div>
           <Link to="/" className="text-2xl font-bold text-teal-400">
             <div className="flex flex-col items-center md:items-start">
@@ -26,7 +25,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-white text-lg font-semibold">Quick Links</h3>
           <ul className="mt-3 space-y-2">
@@ -59,7 +57,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social Media */}
         <div>
           <h3 className="text-white text-lg font-semibold">Follow Us</h3>
           <div className="flex justify-center md:justify-start gap-4 mt-4">
@@ -76,7 +73,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copyright */}
       <div className="text-center text-sm mt-8 border-t border-gray-700 pt-4">
         © {new Date().getFullYear()} WatchMovies. All Rights Reserved.
       </div>

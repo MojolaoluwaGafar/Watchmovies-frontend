@@ -39,7 +39,7 @@ const WatchlistButton = ({ movie }) => {
   );
 };
 
-// ✅ Prop validation for WatchlistButton
+
 WatchlistButton.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

@@ -27,7 +27,6 @@ export const WatchlistProvider = ({ children }) => {
   );
 };
 
-// Add prop validation for children
 WatchlistProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

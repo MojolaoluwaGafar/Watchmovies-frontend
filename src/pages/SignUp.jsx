@@ -12,7 +12,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // NEW: Loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -109,7 +109,7 @@ const SignUp = () => {
           <button
             type="submit"
             className="w-full bg-teal-400 py-3 rounded-md font-bold disabled:opacity-50"
-            disabled={loading} // Disables button while loading
+            disabled={loading}
           >
             {loading ? "Signing Up..." : "Sign Up"}
           </button>

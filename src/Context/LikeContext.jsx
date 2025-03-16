@@ -32,7 +32,6 @@ export const LikeProvider = ({ children }) => {
   );
 };
 
-// ✅ Fix: PropTypes Validation
 LikeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

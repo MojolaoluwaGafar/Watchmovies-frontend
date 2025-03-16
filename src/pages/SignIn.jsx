@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext"; // Context for authentication
+import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 
 
 const SignIn = () => {
-  const { login } = useContext(AuthContext); // Set user globally
+  const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,6 @@ const SignIn = () => {
     try {
       await login(formData.email, formData.password);
 
-      // ✅ Redirect to homepage
       navigate("/");
     } catch (err) {
       setError(err.message);

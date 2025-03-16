@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import HeroSection from "../components/HeroSection";
 import MovieList from "../components/Movie/MovieList";
 import { WatchlistContext } from "../Context/WatchlistContext";
-import { LikeContext } from "../Context/LikeContext"; // Import LikeContext
+import { LikeContext } from "../Context/LikeContext";
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -10,7 +10,7 @@ const Home = () => {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
 
   const { watchlist, toggleWatchlist } = useContext(WatchlistContext);
-  const { likedMovies, toggleLike } = useContext(LikeContext); // Get LikeContext
+  const { likedMovies, toggleLike } = useContext(LikeContext);
 
   useEffect(() => {
     const fetchMovies = async (category, setter) => {
@@ -32,7 +32,7 @@ const Home = () => {
         if (data.results) {
           setter(
             data.results
-              .filter((movie) => movie && movie.id) // Ensure movies are valid
+              .filter((movie) => movie && movie.id)
               .map((movie) => ({
                 id: movie.id,
                 title: movie.title,

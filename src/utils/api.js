@@ -17,7 +17,7 @@ export const registerUser = async (userData) => {
       throw new Error(data.message || "Registration failed");
     }
 
-    return data; // { user, token }
+    return data;
   } catch (error) {
     console.error("Error registering user:", error);
     return { error: error.message };
@@ -38,11 +38,10 @@ export const loginUser = async (userData) => {
       throw new Error(data.message || "Login failed");
     }
 
-    // ✅ Store token and user data in localStorage
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
-    return data; // { user, token }
+    return data;
   } catch (error) {
     console.error("Error logging in:", error);
     return { error: error.message };

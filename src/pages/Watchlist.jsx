@@ -3,13 +3,11 @@ import { useState, useEffect } from "react";
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
 
-  // Load watchlist from localStorage on component mount
   useEffect(() => {
     const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
     setWatchlist(storedWatchlist);
   }, []);
 
-  // Remove movie from watchlist
   const removeFromWatchlist = (movieId) => {
     const updatedWatchlist = watchlist.filter((movie) => movie.id !== movieId);
     setWatchlist(updatedWatchlist);

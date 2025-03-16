@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import MovieCard from "./MovieCard";
-import { LikeContext } from "../../Context/LikeContext"; // ✅ Import LikeContext
+import { LikeContext } from "../../Context/LikeContext";
 
 const MovieList = ({ movies = [], onWatchlistToggle, watchlist = [] }) => {
-  const { likedMovies, toggleLike } = useContext(LikeContext); // ✅ Use LikeContext
+  const { likedMovies, toggleLike } = useContext(LikeContext);
 
   // Filter out null/undefined movies before rendering
   const validMovies = movies.filter((movie) => movie && movie.id);
@@ -15,7 +15,6 @@ const MovieList = ({ movies = [], onWatchlistToggle, watchlist = [] }) => {
 
   return (
     <div className="relative">
-      {/* Horizontal scroll for mobile */}
       <div className="flex lg:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
         {validMovies.map((movie) => (
           <div key={movie.id} className="snap-center flex-shrink-0 w-40">
@@ -23,14 +22,12 @@ const MovieList = ({ movies = [], onWatchlistToggle, watchlist = [] }) => {
               movie={movie}
               onWatchlistToggle={onWatchlistToggle}
               isWatchlisted={watchlist.some((m) => m?.id === movie.id)}
-              onLikeToggle={toggleLike} // ✅ Pass Like Toggle
-              isLiked={likedMovies.some((m) => m.id === movie.id)} // ✅ Check if liked
+              onLikeToggle={toggleLike}
+              isLiked={likedMovies.some((m) => m.id === movie.id)}
             />
           </div>
         ))}
       </div>
-
-      {/* Grid layout for large screens */}
       <div className="hidden lg:grid grid-cols-4 xl:grid-cols-5 gap-6">
         {validMovies.slice(0, 15).map((movie) => (
           <MovieCard
@@ -38,8 +35,8 @@ const MovieList = ({ movies = [], onWatchlistToggle, watchlist = [] }) => {
             movie={movie}
             onWatchlistToggle={onWatchlistToggle}
             isWatchlisted={watchlist.some((m) => m?.id === movie.id)}
-            onLikeToggle={toggleLike} // ✅ Pass Like Toggle
-            isLiked={likedMovies.some((m) => m.id === movie.id)} // ✅ Check if liked
+            onLikeToggle={toggleLike}
+            isLiked={likedMovies.some((m) => m.id === movie.id)}
           />
         ))}
       </div>

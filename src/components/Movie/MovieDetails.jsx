@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -137,6 +137,10 @@ const MovieDetails = () => {
                     ></iframe>
                   </div>
                 )}
+
+                <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105">
+                  <Link to={`/watch/${id}`}>🎬 Watch Now</Link>
+                </button>
 
                 <button
                   onClick={() => navigate(-1)}
