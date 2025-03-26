@@ -10,8 +10,9 @@ const PopularMovies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+         const apiKey = import.meta.env.VITE_TMDB_API_KEY;
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=35e506fd9b296749fec3d8b8118e2652`
+          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
         );
         const data = await response.json();
 
