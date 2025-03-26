@@ -11,6 +11,8 @@ import MoviePage from "./pages/MoviePage";
 import TrendingMovies from "./components/TrendingMovies";
 import PopularMovies from "./components/PopularMovies";
 import TopRatedMovies from "./components/TopRatedMovies";
+import SearchResults from "./pages/SearchResults";
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path="/trending" element={<TrendingMovies />} />
           <Route path="/popular" element={<PopularMovies />} />
           <Route path="/top-rated" element={<TopRatedMovies />} />
+          <Route path="/search-results" element={<SearchResults />} />
           <Route
             path="/watchlist"
             element={

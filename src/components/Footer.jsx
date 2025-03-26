@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-gray-300 py-12 mt-10">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         <div>
-          <Link to="/" className="text-2xl font-bold text-teal-400">
+          <Link to="/" className="text-2xl font-bold text-teal-200">
             <div className="flex flex-col items-center md:items-start">
               <p>
                 <span className="text-sm ps-0 lg:ps-5">WATCH</span>

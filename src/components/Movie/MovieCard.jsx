@@ -55,6 +55,8 @@ const MovieCard = ({
           <FaRegHeart className="text-gray-400 text-lg transition-all duration-300 hover:text-red-500" />
         )}
       </button>
+
+      
       <div className="mt-3">
         <h3 className="font-semibold text-lg truncate">
           {movie?.title || "Unknown Title"}

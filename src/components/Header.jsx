@@ -6,7 +6,7 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <header className="bg-black py-4">
       <div className="container mx-auto flex justify-between items-center px-4">
-        <Link to="/" className="text-2xl font-bold text-teal-400">
+        <Link to="/" className="text-2xl font-bold text-teal-200">
           <div className="flex flex-col items-center">
             <p>
               <span className="text-sm">WATCH</span>

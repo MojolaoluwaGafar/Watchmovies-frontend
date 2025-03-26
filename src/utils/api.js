@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://watchmovies-backend.onrender.com";
+const API_BASE_URL = "http://localhost:5001/api";
 
 export const registerUser = async (userData) => {
   console.log("Registering user with data:", userData);
