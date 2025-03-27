@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY; // Get from .env
 
@@ -37,21 +38,58 @@ export default function SearchResults() {
   }, [query]); // Fetch movies when query changes
 
   return (
-    <div className="py-10 px-5">
-      <h1 className="text-3xl font-bold text-teal-500 text-center">
-        Search Results for <span>"{query}"</span>
-      </h1>
+    <motion.div
+      className="py-10 px-5 bg-gray-900 min-h-screen"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      {/* Animated Title */}
+      <motion.h1
+        className="text-3xl font-bold text-teal-400 text-center"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        Search Results for <span className="text-white">{query}</span>
+      </motion.h1>
 
       {/* Error Message */}
-      {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+      {error && (
+        <motion.p
+          className="text-red-500 text-center mt-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {error}
+        </motion.p>
+      )}
 
       {/* Search Results Grid */}
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <motion.div
+        className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 },
+          },
+        }}
+      >
         {movies.map((movie) => (
-          <div
+          <motion.div
             key={movie.id}
-            className="cursor-pointer bg-gray-900 p-3 rounded-lg shadow-lg hover:scale-105 transition-transform"
+            className="cursor-pointer bg-gray-800 p-4 rounded-lg shadow-lg overflow-hidden"
             onClick={() => navigate(`/movie/${movie.id}`)}
+            whileHover={{ scale: 1.05, rotate: 1 }}
+            whileTap={{ scale: 0.95 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
           >
             <img
               src={
@@ -62,23 +100,30 @@ export default function SearchResults() {
               alt={movie.title || "No Title"}
               className="w-full h-60 object-cover rounded-md"
             />
-            <h3 className="text-lg font-bold mt-2 text-white">
-              {movie.title || "Untitled"}
-            </h3>
-            <p className="text-gray-400">
-              {movie.release_date
-                ? movie.release_date.split("-")[0]
-                : "Unknown Year"}{" "}
-              | ⭐ {movie.vote_average || "N/A"}
-            </p>
-            <p className="text-sm text-gray-300 mt-2">
-              {movie.overview
-                ? movie.overview.slice(0, 100) + "..."
-                : "No description available."}
-            </p>
-          </div>
+
+            <motion.div
+              className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex justify-center items-center text-white text-xs p-2"
+              whileHover={{ opacity: 1 }}
+            >
+              <p>{movie.overview?.substring(0, 80)}...</p>
+            </motion.div>
+
+            <div className="p-4 text-center">
+              <h3 className="text-lg font-semibold text-white">
+                {movie.title || "Untitled"}
+              </h3>
+              <p className="text-yellow-400 text-sm">
+                ⭐ {movie.vote_average?.toFixed(1) || "N/A"}
+              </p>
+              <p className="text-gray-400 text-xs mt-1">
+                {movie.release_date
+                  ? movie.release_date.split("-")[0]
+                  : "Unknown Year"}
+              </p>
+            </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
