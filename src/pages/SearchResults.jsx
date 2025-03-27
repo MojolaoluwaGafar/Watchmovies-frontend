@@ -39,7 +39,7 @@ export default function SearchResults() {
   return (
     <div className="py-10 px-5">
       <h1 className="text-3xl font-bold text-teal-500 text-center">
-        Search Results for {query}
+        Search Results for <span>"{query}"</span>
       </h1>
 
       {/* Error Message */}
