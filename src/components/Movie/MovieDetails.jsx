@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -71,137 +72,148 @@ const MovieDetails = () => {
 
   if (loading)
     return (
-      <div className="text-center text-white text-lg animate-pulse">
+      <motion.div
+        className="text-center text-white text-lg animate-pulse"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         Loading...
-      </div>
+      </motion.div>
     );
   if (error)
     return <div className="text-center text-red-500 text-lg">{error}</div>;
 
   return (
-    <div
+    <motion.div
       className="relative bg-cover bg-center min-h-screen flex items-center text-white"
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${movie?.backdrop_path})`,
       }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
     >
       <div className="bg-gradient-to-t from-black via-black/70 to-transparent w-full h-full absolute top-0 left-0"></div>
 
       {movie && (
-        <div className="container mx-auto p-6 relative z-10">
+        <motion.div
+          className="container mx-auto p-6 relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            <img
+            <motion.img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
-              className="w-full md:w-1/3 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+              className="w-full md:w-1/3 rounded-lg shadow-lg"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             />
 
-            <div className="md:ml-8 text-center md:text-left">
+            <motion.div
+              className="md:ml-8 text-center md:text-left"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               <h1 className="text-4xl font-extrabold mb-2">{movie.title}</h1>
               {movie.tagline && (
                 <p className="italic text-yellow-400 mb-4">{movie.tagline}</p>
               )}
               <p className="text-gray-300 text-lg mb-6">{movie.overview}</p>
 
-              <div className="text-gray-400 space-y-2">
-                <p>
-                  <strong className="text-white">📅 Release Date:</strong>{" "}
-                  {movie.release_date || "Unknown"}
-                </p>
-                <p>
-                  <strong className="text-white">⭐ Rating:</strong>{" "}
-                  {movie.vote_average?.toFixed(1) || "No Rating"}/10
-                </p>
-                <p>
-                  <strong className="text-white">🎭 Genres:</strong>{" "}
-                  {movie.genres?.map((g) => g.name).join(", ") || "N/A"}
-                </p>
-                <p>
-                  <strong className="text-white">⏳ Runtime:</strong>{" "}
-                  {movie.runtime ? `${movie.runtime} minutes` : "N/A"}
-                </p>
-              </div>
+              <motion.button
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mt-4"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link to={`/watch/${id}`}>🎬 Watch Now</Link>
+              </motion.button>
 
-              <div className="mt-6 flex flex-col md:flex-row gap-4">
-                {trailerKey && (
-                  <div className="mt-6">
-                    <h2 className="text-2xl font-bold mb-2">
-                      🎥 Official Trailer
-                    </h2>
-                    <iframe
-                      className="w-full md:w-3/4 h-64 md:h-96 rounded-lg shadow-lg"
-                      src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                )}
+              <motion.button
+                onClick={() => navigate(-1)}
+                className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-lg ml-4"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                ⬅ Go Back
+              </motion.button>
+            </motion.div>
+          </div>
 
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105">
-                  <Link to={`/watch/${id}`}>🎬 Watch Now</Link>
-                </button>
-
-                <button
-                  onClick={() => navigate(-1)}
-                  className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105"
-                >
-                  ⬅ Go Back
-                </button>
+          {trailerKey && (
+            <div className="mt-10">
+              <h2 className="text-2xl font-bold mb-4">🎬 Trailer</h2>
+              <div className="w-full md:w-3/4 mx-auto">
+                <iframe
+                  className="w-full h-64 md:h-96 rounded-lg"
+                  src={`https://www.youtube.com/embed/${trailerKey}`}
+                  title="Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
-          </div>
+          )}
+
           {cast.length > 0 && (
-            <div className="mt-10">
+            <motion.div
+              className="mt-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <h2 className="text-2xl font-bold mb-4">🎭 Cast</h2>
-              <div className="flex space-x-4 overflow-x-auto p-2 scrollbar-thin scrollbar-thumb-gray-700">
+              <div className="flex gap-4 overflow-x-auto">
                 {cast.map((actor) => (
-                  <div key={actor.id} className="text-center min-w-[120px]">
+                  <div key={actor.id} className="text-center">
                     <img
-                      src={
-                        actor.profile_path
-                          ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
-                          : "/default-avatar.png"
-                      }
+                      src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                       alt={actor.name}
-                      className="w-24 h-24 object-cover rounded-full mx-auto border border-gray-500 shadow-lg"
+                      className="rounded-lg w-24 h-24 object-cover"
                     />
-                    <p className="text-white text-sm mt-2 font-semibold">
-                      {actor.name}
-                    </p>
-                    <p className="text-gray-400 text-xs italic">
-                      {actor.character}
-                    </p>
+                    <p className="mt-2 text-sm">{actor.name}</p>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {similarMovies.length > 0 && (
-            <div className="mt-10">
-              <h2 className="text-2xl font-bold mb-4">🔗 Similar Movies</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {similarMovies.slice(0, 8).map((movie) => (
-                  <div
+            <motion.div
+              className="mt-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <h2 className="text-2xl font-bold mb-4">🎬 Similar Movies</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {similarMovies.map((movie) => (
+                  <Link
                     key={movie.id}
-                    className="cursor-pointer hover:scale-105 transition-transform"
-                    onClick={() => navigate(`/movie/${movie.id}`)}
+                    to={`/movie/${movie.id}`}
+                    className="hover:scale-105 transition"
                   >
                     <img
-                      src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       alt={movie.title}
-                      className="rounded-lg shadow-lg hover:opacity-80"
+                      className="rounded-lg w-full h-48 object-cover"
                     />
-                    <p className="text-white mt-2 text-center">{movie.title}</p>
-                  </div>
+                    <p className="text-center mt-2 font-semibold">
+                      {movie.title}
+                    </p>
+                  </Link>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

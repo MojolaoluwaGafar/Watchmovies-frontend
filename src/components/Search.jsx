@@ -24,12 +24,12 @@ export default function Search() {
   return (
     <div className="py-10 text-center">
       <motion.h1
-        className="text-5xl font-bold bg-gradient-to-r from-teal-200 to-teal-900 bg-clip-text text-transparent animate-pulse"
+        className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-teal-200 to-teal-900 bg-clip-text text-transparent animate-pulse"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Want To <br /> Watch Movies?
+        Watch a newly discovered movie
       </motion.h1>
 
       <motion.form
@@ -41,7 +41,7 @@ export default function Search() {
       >
         <input
           type="search"
-          placeholder="Search for a movie to watch"
+          placeholder="Search right here"
           onChange={(e) => debouncedSetQuery(e.target.value)}
           className="block border border-teal-200 w-full rounded-md py-2 pl-12 pr-4 text-center focus:outline-none focus:ring-2 focus:ring-teal-500"
           aria-label="Search movies"

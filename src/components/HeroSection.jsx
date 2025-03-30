@@ -63,7 +63,7 @@ const HeroSection = () => {
   if (loading) {
     return (
       <section className="h-[80vh] flex justify-center items-center text-white">
-        <p>Loading featured movies...</p>
+        <p>Loading popular movies...</p>
       </section>
     );
   }

@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+// import { BiSolidCameraMovie } from "react-icons/bi";
+
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
@@ -22,12 +24,17 @@ const Header = () => {
           <Link to="/" className="text-2xl font-bold text-teal-200">
             <div className="flex flex-col items-center">
               <p>
-                <span className="text-sm">WATCH</span>
+                <span className="text-sm relative">WATCH</span>
               </p>
               <p>
-                <span>MOVIES</span>
+                <span className="">MOVIES</span>
               </p>
             </div>
+            {/* <div>
+              <span className="absolute top-7 left-22">
+                <BiSolidCameraMovie size={20} />
+              </span>
+            </div> */}
           </Link>
         </motion.div>
 

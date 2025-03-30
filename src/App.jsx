@@ -7,11 +7,12 @@ import SignUp from "./pages/SignUp";
 import Watchlist from "./pages/Watchlist";
 import PrivateRoute from "./components/PrivateRoute";
 import MovieDetails from "./components/Movie/MovieDetails";
-import MoviePage from "./pages/MoviePage";
+import WatchPage from "./pages/WatchPage";
 import TrendingMovies from "./components/TrendingMovies";
 import PopularMovies from "./components/PopularMovies";
 import TopRatedMovies from "./components/TopRatedMovies";
 import SearchResults from "./pages/SearchResults";
+import MoviesPage from "./pages/MoviesPage"
 
 
 function App() {
@@ -24,11 +25,12 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/watch/:id" element={<MoviePage />} />
+          <Route path="/watch/:id" element={<WatchPage />} />
           <Route path="/trending" element={<TrendingMovies />} />
           <Route path="/popular" element={<PopularMovies />} />
           <Route path="/top-rated" element={<TopRatedMovies />} />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/movies" element={<MoviesPage />}  />
           <Route
             path="/watchlist"
             element={

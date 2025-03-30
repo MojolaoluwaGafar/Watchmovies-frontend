@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 
-
 const SignIn = () => {
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -22,7 +21,6 @@ const SignIn = () => {
 
     try {
       await login(formData.email, formData.password);
-
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -33,45 +31,44 @@ const SignIn = () => {
 
   return (
     <section className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-center text-2xl mb-4 text-teal-600">Sign In to watch your saved movies now!</h2>
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-center text-3xl mb-6 text-teal-200 font-bold">
+          Sign In
+        </h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="block mb-1">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              className="w-full p-2 rounded bg-gray-700 border border-gray-600"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="block mb-1">Password</label>
-            <input
-              type="password"
-              name="password"
-              className="w-full p-2 rounded bg-gray-700 border border-gray-600"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            name="email"
+            className="w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-teal-500"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            className="w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-teal-500"
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <button
             type="submit"
-            className="w-full bg-teal-500 hover:bg-teal-600 text-white p-2 rounded mt-3"
+            className="w-full bg-gray-900 hover:bg-gray-600 hover:border-2 hover:border-teal-500 text-white font-bold py-3 rounded-md transition-transform transform hover:scale-105"
             disabled={loading}
           >
             {loading ? "Signing In..." : "Sign In"}
           </button>
-          <p className="text-center py-2">Dont have an account? <span className="text-teal-600"><Link to="/signup">Sign up</Link></span></p>
         </form>
+        <p className="text-center text-gray-400 mt-4">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-teal-400 ml-1 font-semibold">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </section>
   );

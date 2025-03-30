@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../components/VideoPlayer";
 
-const MoviePage = () => {
+const WatchPage = () => {
   const { id } = useParams();
   const [videoUrl, setVideoUrl] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,4 +44,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default WatchPage;
