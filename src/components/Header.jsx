@@ -46,7 +46,7 @@ const Header = () => {
           {[
             { name: "Trending", path: "/trending" },
             { name: "Popular", path: "/popular" },
-            { name: "Top Rated", path: "/top-rated" }, // Changed to "/top-rated"
+            { name: "Top Rated", path: "/top-rated" }, 
           ].map((item, index) => (
             <motion.div
               key={item.name}
@@ -103,6 +103,7 @@ const Header = () => {
           )}
         </div>
       </div>
+
 
       {/* Mobile Menu with Framer Motion */}
       <AnimatePresence>
